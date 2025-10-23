@@ -1,21 +1,51 @@
-# zaidofficial.us
+# Zaid's World — Cinematic 3D Experience
 
-Static portfolio for Zaid Umar. The `/docs` folder is ready for GitHub Pages so the site can serve from `https://zaidofficial.us` or `https://<github-username>.github.io/zaidofficial.us/`.
+This repository hosts **Zaid's World**, a cinematic, motion-rich React experience featuring 3D globes, parallax storytelling, and interactive booking flows. The project is powered by Vite, Tailwind CSS, Framer Motion, and Three.js via React Three Fiber.
 
-## Local preview
-
-Open `docs/index.html` directly in a browser or serve the folder locally:
+## Getting started
 
 ```bash
-npx serve docs
+npm install
+npm run dev
 ```
 
-## Publishing to GitHub Pages
+The development server runs on [http://localhost:5173](http://localhost:5173) with hot module replacement.
 
-1. Push this repository to GitHub.
-2. In **Settings → Pages**, choose **Deploy from a branch** and set the folder to `/docs` on the default branch.
-3. Save. GitHub Pages will build and host the site automatically.
-4. (Optional) Point your custom domain to GitHub Pages using `A` records for `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`. Add `CNAME` record for `zaidofficial.us` pointing to `<github-username>.github.io`.
-5. Keep the `docs/CNAME` file in this repo with `zaidofficial.us` so GitHub Pages knows which domain to serve.
+## Building for production
 
-Once DNS propagates and the Pages build finishes, your site will be live at `https://zaidofficial.us`.
+```bash
+npm run build
+```
+
+The optimized output is generated in the `dist/` directory. You can preview the production build locally with:
+
+```bash
+npm run preview
+```
+
+## Tech stack
+
+- **React 18 + Vite** — modern component-driven architecture and fast bundling.
+- **Tailwind CSS** — responsive, utility-first styling with custom neon gradients.
+- **Framer Motion & GSAP-ready** — smooth scroll-triggered animations and hover interactions.
+- **Three.js + @react-three/fiber** — immersive 3D globes, floating imagery, and camera motion.
+
+## Project structure
+
+```
+├─ index.html          # Vite entry point
+├─ src/
+│  ├─ App.jsx          # Layout and section routing
+│  ├─ components/      # Navigation and shared UI components
+│  ├─ sections/        # Cinematic content sections (Home, Photography, Art, Travel, Contact, Booking)
+│  └─ index.css        # Tailwind layers + custom styles
+└─ public/             # (optional) static assets
+```
+
+## Deployment tips
+
+1. Run `npm run build`.
+2. Serve the generated `dist/` directory on your preferred static host (Netlify, Vercel, GitHub Pages, etc.).
+3. For GitHub Pages, publish the contents of `dist/` to the `gh-pages` branch or configure your repository to serve from the build output.
+
+Enjoy crafting and extending Zaid’s cinematic world! ✨
