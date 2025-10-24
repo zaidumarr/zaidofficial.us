@@ -1,113 +1,161 @@
-import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
-import SideNavigation from './components/SideNavigation.jsx';
-import HomeSection from './sections/HomeSection.jsx';
-import PhotographySection from './sections/PhotographySection.jsx';
-import ArtSection from './sections/ArtSection.jsx';
-import TravelSection from './sections/TravelSection.jsx';
-import ContactSection from './sections/ContactSection.jsx';
-import BookingSection from './sections/BookingSection.jsx';
+import { useEffect, useState } from 'react';
 
-const sections = [
-  { id: 'home', label: 'Home', component: HomeSection },
-  { id: 'photography', label: 'Photography', component: PhotographySection },
-  { id: 'contact', label: 'Contact', component: ContactSection },
-  { id: 'booking', label: 'Booking', component: BookingSection },
-  { id: 'art', label: 'Art', component: ArtSection },
-  { id: 'travel', label: 'Travel', component: TravelSection }
+const galleryImages = [
+  'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1526226128118-9918f71ef07e?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1500530855697-7e87fbbab986?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80'
 ];
 
-const glowVariants = {
-  initial: { opacity: 0, scale: 0.8 },
-  animate: {
-    opacity: [0.15, 0.35, 0.15],
-    scale: [0.8, 1.1, 0.8],
-    transition: { duration: 12, repeat: Infinity }
-  }
-};
+const navLinks = [
+  { href: '#work', label: 'Work' },
+  { href: '#about', label: 'About' },
+  { href: '#contact', label: 'Contact' }
+];
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
+    const sections = document.querySelectorAll('.reveal');
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
           }
         });
       },
-      { threshold: 0.45 }
+      { threshold: 0.2 }
     );
 
-    const elements = sections
-      .map((section) => document.getElementById(section.id))
-      .filter((el) => el !== null);
-
-    elements.forEach((el) => observer.observe(el));
+    sections.forEach((section) => observer.observe(section));
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      sections.forEach((section) => observer.unobserve(section));
     };
   }, []);
 
-  const sectionComponents = useMemo(
-    () =>
-      sections.map((section) => {
-        const Component = section.component;
-        return { ...section, element: <Component /> };
-      }),
-    []
-  );
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setNavOpen(false);
+      }
+    };
 
-  const handleNavigate = (id) => {
-    const target = document.getElementById(id);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-slate-100">
-      <motion.div
-        variants={glowVariants}
-        initial="initial"
-        animate="animate"
-        className="pointer-events-none absolute -left-32 top-40 h-96 w-96 rounded-full bg-aurora/25 blur-3xl"
-      />
-      <motion.div
-        variants={glowVariants}
-        initial="initial"
-        animate="animate"
-        className="pointer-events-none absolute right-[-120px] top-1/3 h-[28rem] w-[28rem] rounded-full bg-magenta/20 blur-3xl"
-      />
-      <div className="pointer-events-none fixed inset-0 opacity-30 mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle, rgba(148, 163, 184, 0.25) 0%, rgba(15, 23, 42, 0.8) 60%, rgba(15, 23, 42, 1) 100%)' }} />
-
-      <SideNavigation
-        activeSection={activeSection}
-        onNavigate={handleNavigate}
-        sections={sections.map(({ id, label }) => ({ id, label }))}
-      />
-
-      <main className="relative z-10 flex flex-col gap-28 pb-32 pl-0 transition-all duration-500 lg:pl-72">
-        {sectionComponents.map(({ id, element, label }) => (
-          <section
-            id={id}
-            key={id}
-            className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 pt-24 lg:px-12"
+    <div className="page">
+      <header className="site-header">
+        <nav className="site-nav">
+          <a className="site-logo" href="#home" aria-label="Zaid Umar home">
+            ZAID UMAR
+          </a>
+          <button
+            className={`nav-toggle${navOpen ? ' is-active' : ''}`}
+            type="button"
+            aria-expanded={navOpen}
+            aria-label="Toggle navigation"
+            onClick={() => setNavOpen((prev) => !prev)}
           >
-            <header className="flex items-center gap-4">
-              <span className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-aurora/60 to-transparent" />
-              <h2 className="font-grotesk text-3xl font-semibold uppercase tracking-[0.4rem] text-slate-200 lg:text-4xl">
-                {label}
-              </h2>
-              <span className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-aurora/60 to-transparent" />
-            </header>
-            {element}
-          </section>
-        ))}
+            <span />
+            <span />
+            <span />
+          </button>
+          <ul className={`site-links${navOpen ? ' is-open' : ''}`}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} onClick={() => setNavOpen(false)}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+
+      <main id="home" className="site-main">
+        <section className="hero">
+          <div className="hero__inner">
+            <p className="eyebrow">Photographer • Designer • Creative Technologist</p>
+            <h1 className="hero__heading">
+              Capturing stories across cities, lights, and emotion — one frame at a time.
+            </h1>
+            <p className="hero__description">
+              I&apos;m Zaid Umar, a Seattle-based creative focused on cinematic photography, design systems, and immersive
+              digital experiences. Explore a curated selection of projects and imagery below.
+            </p>
+            <div className="hero__actions">
+              <a className="cta" href="#work">
+                View Portfolio
+              </a>
+              <a className="cta secondary" href="mailto:zaiduboston@gmail.com">
+                Contact
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="work" className="section reveal">
+          <div className="section__inner">
+            <h2>Selected Works</h2>
+            <div className="gallery">
+              {galleryImages.map((src, index) => (
+                <figure className="gallery__item" key={src}>
+                  <img src={src} alt={`Gallery item ${index + 1}`} loading="lazy" />
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="section reveal">
+          <div className="section__inner section__inner--narrow">
+            <h2>About</h2>
+            <p>
+              My work bridges photography, product thinking, and technology. From intimate portrait sessions to cinematic travel
+              narratives and interactive experiences, I focus on pairing precise technical execution with emotive storytelling.
+              Currently based in Seattle, available for commissions worldwide.
+            </p>
+          </div>
+        </section>
+
+        <section id="contact" className="section reveal">
+          <div className="section__inner section__inner--narrow">
+            <h2>Contact</h2>
+            <p>
+              Let&apos;s collaborate on your next visual story. For bookings, partnerships, or creative inquiries, send an email and
+              I&apos;ll respond within two business days.
+            </p>
+            <a className="cta" href="mailto:zaiduboston@gmail.com">
+              Get in Touch
+            </a>
+          </div>
+        </section>
       </main>
+
+      <footer className="site-footer">
+        <p>© {new Date().getFullYear()} Zaid Umar. All rights reserved.</p>
+        <div className="footer-links">
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">
+            YouTube
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
