@@ -31,7 +31,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.18 }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -54,11 +54,13 @@ export default function App() {
 
   return (
     <div className="page">
-      <header className="site-header">
-        <nav className="site-nav">
+      <a className="skip-link" href="#main">Skip to content</a>
+      <header className="site-header" role="banner">
+        <nav className="site-nav" aria-label="Primary navigation">
           <a className="site-logo" href="#home" aria-label="Zaid Umar home">
             ZAID UMAR
           </a>
+
           <button
             className={`nav-toggle${navOpen ? ' is-active' : ''}`}
             type="button"
@@ -70,7 +72,8 @@ export default function App() {
             <span />
             <span />
           </button>
-          <ul className={`site-links${navOpen ? ' is-open' : ''}`}>
+
+          <ul className={`site-links${navOpen ? ' is-open' : ''}`}> 
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a href={link.href} onClick={() => setNavOpen(false)}>
@@ -78,26 +81,30 @@ export default function App() {
                 </a>
               </li>
             ))}
+            <li>
+              <a href="/assets/Resume-Zaid-Umar.pdf" target="_blank" rel="noopener noreferrer">
+                Resume
+              </a>
+            </li>
           </ul>
         </nav>
       </header>
 
-      <main id="home" className="site-main">
+      <main id="main" className="site-main">
         <section className="hero">
           <div className="hero__inner">
-            <p className="eyebrow">Photographer • Designer • Creative Technologist</p>
-            <h1 className="hero__heading">
-              Capturing stories across cities, lights, and emotion — one frame at a time.
-            </h1>
+            <p className="eyebrow">Photographer • Developer • Creative Technologist</p>
+            <h1 className="hero__heading">I build dependable developer tools and tell stories through imagery.</h1>
             <p className="hero__description">
-              I&apos;m Zaid Umar, a Seattle-based creative focused on cinematic photography, design systems, and immersive
-              digital experiences. Explore a curated selection of projects and imagery below.
+              I&apos;m Zaid Umar — I combine engineering rigor with creative practice to ship polished web experiences,
+              APIs, and cinematic photography. Based in the PNW; available for remote and on-site work.
             </p>
+
             <div className="hero__actions">
               <a className="cta" href="#work">
                 View Portfolio
               </a>
-              <a className="cta secondary" href="mailto:zaiduboston@gmail.com">
+              <a className="cta secondary" href="mailto:hello@zaidofficial.us">
                 Contact
               </a>
             </div>
@@ -107,10 +114,11 @@ export default function App() {
         <section id="work" className="section reveal">
           <div className="section__inner">
             <h2>Selected Works</h2>
-            <div className="gallery">
+            <div className="gallery" aria-live="polite">
               {galleryImages.map((src, index) => (
                 <figure className="gallery__item" key={src}>
-                  <img src={src} alt={`Gallery item ${index + 1}`} loading="lazy" />
+                  <img src={src} alt={`Portfolio image ${index + 1}`} loading="lazy" width="600" height="400" />
+                  <figcaption className="sr-only">Portfolio image {index + 1}</figcaption>
                 </figure>
               ))}
             </div>
@@ -121,9 +129,12 @@ export default function App() {
           <div className="section__inner section__inner--narrow">
             <h2>About</h2>
             <p>
-              My work bridges photography, product thinking, and technology. From intimate portrait sessions to cinematic travel
-              narratives and interactive experiences, I focus on pairing precise technical execution with emotive storytelling.
-              Currently based in Seattle, available for commissions worldwide.
+              I combine product thinking, infrastructure, and visual storytelling. My background spans release orchestration,
+              API development, and photo/video production. I enjoy building tools that save teams time and craft that connects with
+              people.
+            </p>
+            <p>
+              Tech: JavaScript/TypeScript, React, Node, Docker, Postgres. Photography: cinematic portraits, travel, aerial.
             </p>
           </div>
         </section>
@@ -132,27 +143,24 @@ export default function App() {
           <div className="section__inner section__inner--narrow">
             <h2>Contact</h2>
             <p>
-              Let&apos;s collaborate on your next visual story. For bookings, partnerships, or creative inquiries, send an email and
-              I&apos;ll respond within two business days.
+              For commissions, collaborations, or engineering work, email <a href="mailto:hello@zaidofficial.us">hello@zaidofficial.us</a>.
             </p>
-            <a className="cta" href="mailto:zaiduboston@gmail.com">
-              Get in Touch
-            </a>
+            <p className="small">I aim to respond within two business days.</p>
           </div>
         </section>
       </main>
 
-      <footer className="site-footer">
+      <footer className="site-footer" role="contentinfo">
         <p>© {new Date().getFullYear()} Zaid Umar. All rights reserved.</p>
         <div className="footer-links">
-          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
-            Instagram
+          <a href="https://github.com/zaidumarr" target="_blank" rel="noopener noreferrer">
+            GitHub
           </a>
-          <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">
-            YouTube
-          </a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
             LinkedIn
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            Instagram
           </a>
         </div>
       </footer>
