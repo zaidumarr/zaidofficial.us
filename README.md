@@ -1,51 +1,25 @@
-# Zaid's World — Cinematic 3D Experience
+# zaidofficial.us — Zaid Umar
 
-This repository hosts **Zaid's World**, a cinematic, motion-rich React experience featuring 3D globes, parallax storytelling, and interactive booking flows. The project is powered by Vite, Tailwind CSS, Framer Motion, and Three.js via React Three Fiber.
+This repository contains a minimal, cinematic portfolio for Zaid Umar — a mix of engineering work and photography. The project uses Vite + React for fast local development and an intentionally lightweight codebase for easy hosting.
 
-## Getting started
+Quick start (dev)
+1. Install dependencies
+   npm install
+2. Run dev server
+   npm run dev
+3. Open http://localhost:5173
 
-```bash
-npm install
-npm run dev
-```
+Build (production)
+1. npm run build
+2. Serve the generated `dist/` directory on your preferred static host (Netlify, Vercel, GitHub Pages, etc.)
+3. For GitHub Pages, publish `dist/` to `gh-pages` or configure Pages to serve from `dist/`.
 
-The development server runs on [http://localhost:5173](http://localhost:5173) with hot module replacement.
+Contact
+For inquiries, please use: info@zaidofical.us
 
-## Building for production
+Assets & domain
+- Place static assets (avatar, resume, production images) in `public/` or `public/assets/` (ensure paths in App.jsx point to `/assets/...`).
+- The repo contains a `CNAME` file for `zaidofficial.us`. When you deploy, point your DNS to the host you choose (GitHub Pages/Netlify/Vercel instructions vary).
 
-```bash
-npm run build
-```
-
-The optimized output is generated in the `dist/` directory. You can preview the production build locally with:
-
-```bash
-npm run preview
-```
-
-## Tech stack
-
-- **React 18 + Vite** — modern component-driven architecture and fast bundling.
-- **Tailwind CSS** — responsive, utility-first styling with custom neon gradients.
-- **Framer Motion & GSAP-ready** — smooth scroll-triggered animations and hover interactions.
-- **Three.js + @react-three/fiber** — immersive 3D globes, floating imagery, and camera motion.
-
-## Project structure
-
-```
-├─ index.html          # Vite entry point
-├─ src/
-│  ├─ App.jsx          # Layout and section routing
-│  ├─ components/      # Navigation and shared UI components
-│  ├─ sections/        # Cinematic content sections (Home, Photography, Art, Travel, Contact, Booking)
-│  └─ index.css        # Tailwind layers + custom styles
-└─ public/             # (optional) static assets
-```
-
-## Deployment tips
-
-1. Run `npm run build`.
-2. Serve the generated `dist/` directory on your preferred static host (Netlify, Vercel, GitHub Pages, etc.).
-3. For GitHub Pages, publish the contents of `dist/` to the `gh-pages` branch or configure your repository to serve from the build output.
-
-Enjoy crafting and extending Zaid’s cinematic world! ✨
+Notes
+I replaced all visible contact emails in the main files with info@zaidofical.us. If you want, I can search and update any remaining occurrences across the repo.

@@ -55,11 +55,10 @@ export default function App() {
   return (
     <div className="page">
       <a className="skip-link" href="#main">Skip to content</a>
+
       <header className="site-header" role="banner">
         <nav className="site-nav" aria-label="Primary navigation">
-          <a className="site-logo" href="#home" aria-label="Zaid Umar home">
-            ZAID UMAR
-          </a>
+          <a className="site-logo" href="#home" aria-label="Zaid Umar home">ZAID UMAR</a>
 
           <button
             className={`nav-toggle${navOpen ? ' is-active' : ''}`}
@@ -76,44 +75,36 @@ export default function App() {
           <ul className={`site-links${navOpen ? ' is-open' : ''}`}> 
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} onClick={() => setNavOpen(false)}>
-                  {link.label}
-                </a>
+                <a href={link.href} onClick={() => setNavOpen(false)}>{link.label}</a>
               </li>
             ))}
             <li>
-              <a href="/assets/Resume-Zaid-Umar.pdf" target="_blank" rel="noopener noreferrer">
-                Resume
-              </a>
+              <a href="/assets/Resume-Zaid-Umar.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             </li>
           </ul>
         </nav>
       </header>
 
-      <main id="main" className="site-main">
-        <section className="hero">
+      <main id="main" className="site-main" role="main">
+        <section id="home" className="hero">
           <div className="hero__inner">
             <p className="eyebrow">Photographer • Developer • Creative Technologist</p>
             <h1 className="hero__heading">I build dependable developer tools and tell stories through imagery.</h1>
             <p className="hero__description">
-              I&apos;m Zaid Umar — I combine engineering rigor with creative practice to ship polished web experiences,
-              APIs, and cinematic photography. Based in the PNW; available for remote and on-site work.
+              I'm Zaid Umar — I combine engineering rigor with creative practice to ship polished web experiences, APIs,
+              and cinematic photography. Based in the PNW; available for remote and on-site work.
             </p>
 
             <div className="hero__actions">
-              <a className="cta" href="#work">
-                View Portfolio
-              </a>
-              <a className="cta secondary" href="mailto:hello@zaidofficial.us">
-                Contact
-              </a>
+              <a className="cta" href="#work">View Portfolio</a>
+              <a className="cta secondary" href="mailto:info@zaidumical.us">Contact</a>
             </div>
           </div>
         </section>
 
-        <section id="work" className="section reveal">
+        <section id="work" className="section reveal" aria-labelledby="work-heading">
           <div className="section__inner">
-            <h2>Selected Works</h2>
+            <h2 id="work-heading">Selected Works</h2>
             <div className="gallery" aria-live="polite">
               {galleryImages.map((src, index) => (
                 <figure className="gallery__item" key={src}>
@@ -125,13 +116,12 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="section reveal">
+        <section id="about" className="section reveal" aria-labelledby="about-heading">
           <div className="section__inner section__inner--narrow">
-            <h2>About</h2>
+            <h2 id="about-heading">About</h2>
             <p>
               I combine product thinking, infrastructure, and visual storytelling. My background spans release orchestration,
-              API development, and photo/video production. I enjoy building tools that save teams time and craft that connects with
-              people.
+              API development, and photo/video production. I enjoy building tools that save teams time and craft that connects with people.
             </p>
             <p>
               Tech: JavaScript/TypeScript, React, Node, Docker, Postgres. Photography: cinematic portraits, travel, aerial.
@@ -139,11 +129,11 @@ export default function App() {
           </div>
         </section>
 
-        <section id="contact" className="section reveal">
+        <section id="contact" className="section reveal" aria-labelledby="contact-heading">
           <div className="section__inner section__inner--narrow">
-            <h2>Contact</h2>
+            <h2 id="contact-heading">Contact</h2>
             <p>
-              For commissions, collaborations, or engineering work, email <a href="mailto:hello@zaidofficial.us">hello@zaidofficial.us</a>.
+              For commissions, collaborations, or engineering work, email <a href="mailto:info@zaidofical.us">info@zaidofical.us</a>.
             </p>
             <p className="small">I aim to respond within two business days.</p>
           </div>
@@ -153,15 +143,9 @@ export default function App() {
       <footer className="site-footer" role="contentinfo">
         <p>© {new Date().getFullYear()} Zaid Umar. All rights reserved.</p>
         <div className="footer-links">
-          <a href="https://github.com/zaidumarr" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-            Instagram
-          </a>
+          <a href="https://github.com/zaidumarr" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </footer>
     </div>
